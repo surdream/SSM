@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mapper文件相当于是dao接口的'实现类'，namespace指定实现接口的路径-->
+<mapper namespace="com.demo01.dao.StudentDao">
+    <!--id和方法的名字保持一致,
+    parameterType和传递的对象保持一致(指定路径，接口方法中指定了就可以省略)
+    resultType指定返回结果封装的实体类路径
+    -->
+
+    <!--useGeneratedKeys把生成的主键放到stuNum-->
+    <insert id="insertStudent" useGeneratedKeys="true" keyProperty="stuNum">
+        insert into students(stu_name,stu_gender,stu_age)
+        value(#{stuName},#{stuGender},#{stuAge})
+    </insert>
+
+    <delete id="deleteStudent">
+        delete from students where stu_num = #{stuNum}
+    </delete>
+
+    <update id="updateStudent">
+        update students
+        set stu_name = #{stuName},stu_gender = #{stuGender},stu_age = #{stuAge}
+        where stu_num = #{stuNum}
+    </update>
+
+<!--  法一：指定别名  -->
+<!--    <select id="listStudents" resultType="com.demo01.dto.Student">-->
+<!--        select stu_num stuNum,stu_name stuName,stu_gender stuGender,stu_age stuAge-->
+<!--        from students-->
+<!--    </select>-->
+<!--  法二：使用映射关联  -->
+    <resultMap id="student" type="Student">
+        <id column="stu_num" property="stuNum"/>
+        <id column="stu_name" property="stuName"/>
+        <id column="stu_gender" property="stuGender"/>
+        <id column="stu_age" property="stuAge"/>
+    </resultMap>
+
+        <!--定义sql片段用include引入-->
+        <sql id="all">stu_num,stu_name,stu_gender,stu_age</sql>
+
+    <!--  查询全部学生  -->
+    <select id="listStudents" resultMap="student">
+        select <include refid="all"></include> from students
+    </select>
+
+    <!-- 查询一个学生(根本就不会根据接口参数名赋值查询) -->
+    <select id="selectStudent" resultMap="student">
+        select <include refid="all"></include> from students
+        where stu_num = #{aaa}
+    </select>
+
+    <!--  分页查询学生（多参数处理）  -->
+    <select id="listStudentsByPage" resultMap="student">
+        select <include refid="all"></include>
+        from students
+        limit #{start},#{pageSize}
+    </select>
+
+    <!--  总记录数  -->
+    <select id="getCount" resultType="int">
+        select count(1) from students
+    </select>
+
+
+</mapper>

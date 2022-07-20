@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+    <!--1.定义键值对；2.引用属性文件-->
+    <properties resource="jdbc.properties"></properties>
+
+
+    <!--设置mybatis的工作属性-->
+<!--    <settings>-->
+<!--        &lt;!&ndash;开启二级缓存&ndash;&gt;-->
+<!--        <setting name="cacheEnable" value="true"/>-->
+<!--        &lt;!&ndash;开启延迟加载&ndash;&gt;-->
+<!--        <setting name="lazyLoadingEnable" value="true"/>-->
+<!--    </settings>-->
+
+
+    <!--设置全路径的简写，mapper文件中可用-->
+    <typeAliases>
+        <typeAlias type="com.demo01.dto.Student" alias="Student"></typeAlias>
+    </typeAliases>
+
+
+    <!-- mybatis的配置插件（分页插件）-->
+<!--    <plugins>-->
+<!--        <plugin interceptor=""></plugin>-->
+<!--    </plugins>-->
+
+
+    <!-- 配置数据源（数据库连接信息）-->
+    <environments default="mysql">
+        <!--可以设置多个，但只用default对应的environment-->
+        <environment id="mysql">
+            <!--用于配置数据库事务管理方式-->
+            <!--type="JDBC" 可以手动管理事务-->
+            <!--type="MANAGED" 依赖容器管理事务-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--用于配置数据库连接信息  POOLED|UNPOOLED-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${mysql_driver}"/>
+                <property name="url" value="${mysql_url}"/>
+                <property name="username" value="${mysql_username}"/>
+                <property name="password" value="${mysql_password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <!-- 1.载入映射文件；2.DAO注解-->
+    <mappers>
+        <mapper resource="mappers/StudentMapper.xml"></mapper>
+    </mappers>
+
+
+
+</configuration>
