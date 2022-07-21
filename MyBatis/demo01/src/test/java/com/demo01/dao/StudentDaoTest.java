@@ -2,6 +2,8 @@ package com.demo01.dao;
 
 import com.demo01.dto.Student;
 import com.demo01.utils.MyBatisUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.jupiter.api.Test;
 
@@ -76,23 +78,41 @@ class StudentDaoTest {
 
     }
 
-    @Test // 分页查询
+//    @Test // 分页查询
+//    void listStudentsByPage() {
+//
+//        StudentDao studentDao = MyBatisUtils.getMapper(StudentDao.class);
+//        List<Student> students  = studentDao.listStudentsByPage(0,5);
+//
+//        for (Student student : students) {
+//            System.out.println(student);
+//        }
+//
+//    }
+//
+//    @Test // 获取总数
+//    void getCount() {
+//        StudentDao studentDao = MyBatisUtils.getMapper(StudentDao.class);
+//        int count = studentDao.getCount();
+//
+//        System.out.println(count);
+//    }
+
+    @Test // 使用pageHelper的分页查询
     void listStudentsByPage() {
 
-        StudentDao studentDao = MyBatisUtils.getMapper(StudentDao.class);
-        List<Student> students  = studentDao.listStudentsByPage(0,5);
+        // 一定要在查询之前设置（mybatis会查询拦截器，然后在查询时设置参数）
+        PageHelper.startPage(2,5);
 
-        for (Student student : students) {
-            System.out.println(student);
+        StudentDao studentDao = MyBatisUtils.getMapper(StudentDao.class);
+        List<Student> students = studentDao.listStudents();
+        PageInfo<Student> pageInfo = new PageInfo<>(students);
+        List<Student> list = pageInfo.getList();
+
+        for (Student stu:list){
+            System.out.println(stu);
         }
 
     }
 
-    @Test // 获取总数
-    void getCount() {
-        StudentDao studentDao = MyBatisUtils.getMapper(StudentDao.class);
-        int count = studentDao.getCount();
-
-        System.out.println(count);
-    }
 }

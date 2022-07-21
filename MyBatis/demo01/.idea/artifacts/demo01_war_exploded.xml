@@ -17,6 +17,8 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.29" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.19.4" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.10" />
+          <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:5.1.10" />
+          <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:2.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">

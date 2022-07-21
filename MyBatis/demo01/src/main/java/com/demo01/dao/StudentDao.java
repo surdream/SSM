@@ -23,8 +23,8 @@ public interface StudentDao {
     public int updateStudent(Student student);
     public List<Student> listStudents();
     public Student selectStudent(int stuNum);
-    public List<Student> listStudentsByPage(@Param("start") int start,@Param("pageSize") int pageSize);
-    public int getCount();
+//    public List<Student> listStudentsByPage(@Param("start") int start,@Param("pageSize") int pageSize);
+//    public int getCount();
 
 
 }

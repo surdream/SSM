@@ -52,16 +52,16 @@
     </select>
 
     <!--  分页查询学生（多参数处理）  -->
-    <select id="listStudentsByPage" resultMap="student">
-        select <include refid="all"></include>
-        from students
-        limit #{start},#{pageSize}
-    </select>
+<!--    <select id="listStudentsByPage" resultMap="student">-->
+<!--        select <include refid="all"></include>-->
+<!--        from students-->
+<!--        limit #{start},#{pageSize}-->
+<!--    </select>-->
 
-    <!--  总记录数  -->
-    <select id="getCount" resultType="int">
-        select count(1) from students
-    </select>
+<!--    &lt;!&ndash;  总记录数  &ndash;&gt;-->
+<!--    <select id="getCount" resultType="int">-->
+<!--        select count(1) from students-->
+<!--    </select>-->
 
 
 </mapper>
