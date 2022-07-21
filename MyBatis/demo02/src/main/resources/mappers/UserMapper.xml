@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo02.dao.UserDao">
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="userId">
+        insert into users(user_name,user_pwd,user_realname,user_img)
+        values(#{userName},#{userPwd},#{userRealName},#{userImg})
+    </insert>
+
+    <resultMap id="user" type="User">
+        <id column="user_id" property="userId" />
+        <id column="user_name" property="userName" />
+        <id column="user_pwd" property="userPwd" />
+        <id column="user_realname" property="userRealName" />
+        <id column="user_img" property="userImg" />
+        <!-- 调用子查询，关联查询，关联另一个查询对象 (column是传递的查询参数) -->
+        <association property="detail" select="com.demo02.dao.DetailDao.selectDetailByUid" column="user_id"/>
+    </resultMap>
+
+    <select id="selectUserByUserName" resultMap="user">
+        select user_id,user_name,user_pwd,user_realname,user_img
+        from users
+        where user_name = #{userName}
+    </select>
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo02.dao.DetailDao">
+
+    <insert id="insertDetail">
+        insert into details(user_addr,user_tel,user_desc,uid)
+        values(#{userAddr},#{userTel},#{userDesc},#{uid})
+    </insert>
+
+    <resultMap id="detail" type="Detail">
+        <id column="detail_id" property="detailId"/>
+        <id column="user_addr" property="userAddr"/>
+        <id column="user_tel" property="userTel"/>
+        <id column="user_desc" property="userDesc"/>
+        <id column="uid" property="uid"/>
+    </resultMap>
+
+    <select id="selectDetailByUid" resultMap="detail">
+        select detail_id,user_addr,user_tel,user_desc,uid
+        from details where uid = #{uid}
+    </select>
+
+
+</mapper>
