@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="jdbc.properties"/>
+    
+    <typeAliases>
+        <typeAlias type="com.dynamic_sql.dto.Member" alias="Member"/>
+    </typeAliases>
+
+    <!--配置数据源（数据库连接信息）-->
+
+    <!--可以设置多个（但只用default）-->
+    <environments default="mysql">
+        <environment id="mysql">
+            <!--用于配置数据库管理方式-->
+            <transactionManager type="JDBC"/>
+            <!--用于配置数据库连接信息-->
+<!--            MyBatis需要一个连接池工厂，工厂产生连接池-->
+            <dataSource type="com.dynamic_sql.utils.DruidDataSourceFactory">
+                <property name="driverClass" value="${driver}"/>
+                <property name="jdbcUrl" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mappers/MemberMapper.xml"/>
+    </mappers>
+
+</configuration>

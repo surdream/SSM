@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="dynamic_sql:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>dynamic_sql</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="exemple-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="dynamic_sql:war exploded" />
+    </root>
+  </artifact>
+</component>
