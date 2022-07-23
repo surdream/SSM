@@ -66,18 +66,20 @@
     </bean>
 
 
-    <bean id="constructor" class="com.Spring_IoC.bean.Constructor">
-        <constructor-arg value="12"/>
-        <constructor-arg value="23.2"/>
-        <constructor-arg value="很高"/>
-        <constructor-arg ref="date"/>
-<!--        <constructor-arg ref="clazz"/>-->
-        <constructor-arg>
-            <bean class="com.Spring_IoC.bean.Clazz">
-                <property name="cid" value="2"/>
-                <property name="cname" value="java2班"/>
-            </bean>
-        </constructor-arg>
+    <bean id="constructor" class="com.Spring_IoC.bean.Constructor" scope="prototype"
+          init-method="init" destroy-method="destroy" autowire="byName">
+<!--        <constructor-arg value="12"/>-->
+        <property name="cd" value="12"/>
+<!--        <constructor-arg value="23.2"/>-->
+<!--        <constructor-arg value="很高"/>-->
+<!--        <constructor-arg ref="date"/>-->
+<!--&lt;!&ndash;        <constructor-arg ref="clazz"/>&ndash;&gt;-->
+<!--        <constructor-arg>-->
+<!--            <bean class="com.Spring_IoC.bean.Clazz">-->
+<!--                <property name="cid" value="2"/>-->
+<!--                <property name="cname" value="java2班"/>-->
+<!--            </bean>-->
+<!--        </constructor-arg>-->
     </bean>
 
 </beans>

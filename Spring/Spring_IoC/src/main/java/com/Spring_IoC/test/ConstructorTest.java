@@ -11,8 +11,10 @@ public class ConstructorTest {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("Application.xml");
         // 通过Spring容器获取Student对象
         Constructor c1 = (Constructor) context.getBean("constructor");
-
+        Constructor c2 = (Constructor) context.getBean("constructor");
+//
         System.out.println(c1);
+        System.out.println(c2);
 //        System.out.println(c1.getHobbies().get(0));
     }
 }
