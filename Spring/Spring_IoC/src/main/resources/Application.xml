@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--
+        通过bean标签将实体类配置给Spring管理，
+        id表示实体类的唯一标识（实体的名称）
+    -->
+    <!--
+    <bean id="student" class="com.Spring_IoC.bean.Student" autowire="byName">
+        <property name="stuNum" value="10002"/>
+        <property name="stuName" value="李梅"/>
+
+        <constructor-arg value="女"/>
+
+        <property name="stuAge" value="18"/>
+        <property name="enterTime">
+            <bean class="java.util.Date"/>
+        </property>
+
+        <property name="hobbies">
+            <list>
+                <bean class="com.Spring_IoC.bean.Book">
+                    <property name="bookId" value="b001"/>
+                    <property name="bookName" value="java"/>
+                </bean>
+                <ref bean="book"/>
+            </list>
+        </property>
+
+        <property name="maps">
+            <map>
+                <entry>
+                    <key>
+                        <value>k1</value>
+                    </key>
+                    <value>123</value>
+                </entry>
+            </map>
+        </property>
+
+        <property name="properties">
+            <props>
+                <prop key="k1">aaa</prop>
+                <prop key="k2">bbb</prop>
+            </props>
+        </property>
+
+
+    </bean>
+     -->
+
+    <bean id="date" class="java.util.Date"/>
+
+    <bean id="clazz" class="com.Spring_IoC.bean.Clazz">
+        <property name="cid" value="1"/>
+        <property name="cname" value="java1班"/>
+    </bean>
+
+    <bean id="book" class="com.Spring_IoC.bean.Book">
+        <property name="bookId" value="b002"/>
+        <property name="bookName" value="python"/>
+    </bean>
+
+
+    <bean id="constructor" class="com.Spring_IoC.bean.Constructor">
+        <constructor-arg value="12"/>
+        <constructor-arg value="23.2"/>
+        <constructor-arg value="很高"/>
+        <constructor-arg ref="date"/>
+<!--        <constructor-arg ref="clazz"/>-->
+        <constructor-arg>
+            <bean class="com.Spring_IoC.bean.Clazz">
+                <property name="cid" value="2"/>
+                <property name="cname" value="java2班"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+</beans>
