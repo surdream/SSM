@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="bookDao" class="com.AOP.beans.BookDaoImpl"/>
+    <bean id="studentDao" class="com.AOP.beans.StudentDaoImpl"/>
+    <bean id="txManager" class="com.AOP.utils.TxManager"/>
+    <bean id="logManager" class="com.AOP.utils.LogManager"/>
+    <bean id="addBook" class="com.AOP.service.AddBook"/>
+    <bean id="myAspect" class="com.AOP.utils.MyAspect"/>
+
+
+    <aop:config>
+
+        <!-- 声明切入点 -->
+        <aop:pointcut id="book" expression="execution(* com.AOP.beans.BookDaoImpl.*())"/>
+<!--        <aop:pointcut id="student" expression="execution(* com.AOP.beans.StudentDaoImpl.*(..))"/>-->
+        <aop:pointcut id="log" expression="execution(* *(..))"/>
+
+        <!-- 声明txManager类为切面类 -->
+<!--        <aop:aspect ref="txManager">-->
+<!--            <aop:before method="begin" pointcut-ref="book"/>-->
+<!--            <aop:after method="commit" pointcut-ref="book"/>-->
+<!--            <aop:before method="begin" pointcut-ref="student"/>-->
+<!--            <aop:after method="commit" pointcut-ref="student"/>-->
+<!--        </aop:aspect>-->
+
+<!--        <aop:aspect ref="logManager">-->
+<!--            <aop:before method="printLog" pointcut-ref="log"/>-->
+<!--        </aop:aspect>-->
+
+        <aop:aspect ref="myAspect">
+            <aop:before method="method1" pointcut-ref="book"/>
+            <aop:after method="method2" pointcut-ref="book"/>
+            <aop:after-throwing method="method3" pointcut-ref="book"/>
+            <aop:after-returning method="method4" pointcut-ref="book"/>
+            <!--
+            1.必须带有参数
+            2.必须有object的返回类型
+             -->
+            <aop:around method="method5" pointcut-ref="book"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

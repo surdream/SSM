@@ -18,7 +18,7 @@ public class StaticProxyTest {
 //        MyStaticProxy proxy = new MyStaticProxy();
 
         // 为被代理对象创建代理对象
-        MyStaticProxy proxy = new MyStaticProxy(studentDao);
-        proxy.insert();
+//        MyStaticProxy proxy = new MyStaticProxy(studentDao);
+//        proxy.insert();
     }
 }
