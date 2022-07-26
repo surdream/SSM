@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.MS.dao.UserDao">
+
+    <resultMap id="user" type="User">
+        <id column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_pwd" property="userPwd"/>
+        <result column="user_realname" property="userRealName"/>
+        <result column="user_img" property="userImg"/>
+    </resultMap>
+
+    <select id="queryUsers" resultMap="user">
+        select user_id,user_name,user_pwd,user_realname,user_img
+        from users
+    </select>
+
+    <insert id="insertUser">
+        insert into users(user_name,user_pwd,user_realname,user_img)
+        values(#{userName},#{userPwd},#{userRealName},#{userImg})
+    </insert>
+</mapper>
